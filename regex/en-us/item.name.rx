@@ -1,0 +1,1 @@
+(add|remove) (?P<item_name>.*) (to|from) (my|the)
