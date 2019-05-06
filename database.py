@@ -23,7 +23,7 @@ class Database:
         self.JSON_PATH = join(dirname(__file__), 'data.json')
         try:
             # Loads list data from data.json
-            json_data = self.read_data()
+            self.json_data = self.read_data()
         except FileNotFoundError:
             # If file not found, creates an empty data.json
             self.json_data = {}
@@ -41,6 +41,9 @@ class Database:
     ## CHECKS
     def item_exists(self, list, item):
         return True if item in self.json_data[list] else False
+
+    def no_lists(self):
+        return True if len(list(self.json_data.keys())) == 0 else False
 
     def list_empty(self, list):
         return True if len(list) == 0 else False
