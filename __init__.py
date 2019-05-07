@@ -21,8 +21,7 @@ from adapt.intent import IntentBuilder
 # Import database.py
 import sys
 from os.path import dirname, abspath
-SKILL_DIR = dirname(abspath(__file__))
-sys.path.append(SKILL_DIR)
+sys.path.append(dirname(abspath(__file__)))
 from database import Database
 
 
@@ -49,7 +48,7 @@ class ListManager(MycroftSkill):
             else:
                 data['items'] = self.string(self.db.read_items(data['list_name']))
 
-                self.speak_dialog('items.in.list', data)
+                self.speak_dialog('read.items', data)
 
         else:
             # Alternatively, simply read lists names
@@ -57,10 +56,10 @@ class ListManager(MycroftSkill):
                 self.speak_dialog('no.lists')
             else:
                 lists = self.db.read_lists()
-                data['list_names'] = self.string(lists)
+                data['lists_names'] = self.string(lists)
                 data['list'] = self.plural_singular_form(lists)
 
-                self.speak_dialog('list.lists', data)
+                self.speak_dialog('read.lists', data)
 
     @intent_handler(IntentBuilder('add')
         .require('add')
@@ -80,7 +79,7 @@ class ListManager(MycroftSkill):
             else:
                 self.db.add_item(data['list_name'], data['item_name'])
 
-                self.speak_dialog('item.added', data)
+                self.speak_dialog('add.item', data)
 
         else:
             # Alternatively, simply create a new list
@@ -89,7 +88,7 @@ class ListManager(MycroftSkill):
             else:
                 self.db.add_list(data['list_name'])
 
-                self.speak_dialog('list.added', data)
+                self.speak_dialog('add.list', data)
 
     @intent_handler(IntentBuilder('del')
         .require('del')
@@ -113,7 +112,7 @@ class ListManager(MycroftSkill):
                     self.db.del_item(data['list_name'],
                                      data['item_name'])
 
-                    self.speak_dialog('item.removed', data)
+                    self.speak_dialog('del.item', data)
 
         else:
             # Alternatively, simply create a new list
@@ -123,7 +122,7 @@ class ListManager(MycroftSkill):
                 if self.confirm_deletion(data['list_name']):
                     self.db.del_list(data['list_name'])
 
-                    self.speak_dialog('list.removed', data)
+                    self.speak_dialog('del.list', data)
 
     def string(self, lists):
         """ Convert a python list into a string such as 'a, b and c' """
@@ -138,10 +137,10 @@ class ListManager(MycroftSkill):
         value = self.translate_namedvalues('list.or.lists', delim=',')
         return value.get('singular') if len(lists) == 1 else value.get('plural')
 
-    def confirm_deletion(self, item):
-        """ Make sure the user really wants to delete an item """
+    def confirm_deletion(self, element):
+        """ Make sure the user really wants to delete 'element' """
 
-        resp = self.ask_yesno('confirm.deletion', data={'item': item})
+        resp = self.ask_yesno('confirm.deletion', data={'element': element})
         if resp == 'yes':
             return True
         else:
