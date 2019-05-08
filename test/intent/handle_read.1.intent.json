@@ -1,0 +1,14 @@
+{
+    "expected_dialog": "read.items",
+    "intent": {
+        "list": "list",
+        "list_name": "films",
+        "what": "what"
+    },
+    "intent_type": "handle_read",
+    "utterance": "What's on my films list?",
+    "expected_data": {
+        "list_name": "films",
+        "items": "office space and snowden"
+    }
+}

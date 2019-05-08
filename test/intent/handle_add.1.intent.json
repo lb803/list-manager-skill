@@ -1,0 +1,15 @@
+{
+    "expected_dialog": "add.item",
+    "intent": {
+        "add": "add",
+        "item_name": "coffee",
+        "list": "list",
+        "list_name": "grocery"
+    },
+    "intent_type": "handle_add",
+    "utterance": "Add coffee to my grocery list",
+    "expected_data": {
+        "list_name": "grocery",
+        "item_name": "coffee"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "expected_dialog": "add.list",
+    "intent": {
+        "add": "create",
+        "list": "list",
+        "list_name": "travel plans"
+    },
+    "intent_type": "handle_add",
+    "utterance": "Create a new list called travel plans",
+    "expected_data": {
+        "list_name": "travel plans"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "expected_dialog": "del.list",
+    "intent": {
+        "del": "remove",
+        "list": "list",
+        "list_name": "important"
+    },
+    "intent_type": "handle_del",
+    "utterance": "Remove my important list",
+    "expected_data": {
+        "list_name": "important"
+    }
+}

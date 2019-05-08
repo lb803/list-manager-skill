@@ -1,0 +1,13 @@
+{
+    "expected_dialog": "read.lists",
+    "intent": {
+        "list": "lists",
+        "what": "what"
+    },
+    "intent_type": "handle_read",
+    "utterance": "What lists do I have?",
+    "expected_data": {
+        "lists_names": "films and books",
+        "list": "lists"
+    }
+}
