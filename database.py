@@ -19,6 +19,17 @@ import json
 from os.path import dirname, join
 
 class Database:
+    """
+    This module manage the data.json file where items ans lists are stored.
+
+    Sections:
+        File handling   take care of read / write operations
+        Checks          methods to assert specific conditions
+        Read            methods to read from data.json
+        Add             methods to write to data.json
+        Del             methods to remove data from data.json
+    """
+
     def __init__(self):
         self.JSON_PATH = join(dirname(__file__), 'data.json')
         try:
@@ -54,25 +65,25 @@ class Database:
     ## READ
     def read_items(self, list):
         return self.json_data.get(list)
-        
+
     def read_lists(self):
         return list(self.json_data.keys())
-        
+
     ## ADD
     def add_item(self, list, item):
         self.json_data[list].append(item)
         self.write_data()
-    
+
     def add_list(self, list):
         self.json_data[list] = []
         self.write_data()
-        
+
     ## DEL
     def del_item(self, list, item):
         item_index = self.json_data[list].index(item)
         del self.json_data[list][item_index]
         self.write_data()
-        
+
     def del_list(self, list):
         del self.json_data[list]
         self.write_data()

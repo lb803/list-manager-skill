@@ -26,6 +26,20 @@ from database import Database
 
 
 class ListManager(MycroftSkill):
+    """
+    List Manager is a simple utility for filing lists with Mycroft.
+
+    Terminology:
+        item    is the information you wish Mycroft to keep record of.
+                This could be as short as a word or an entire sentence.
+        list    is a collection of items.
+
+    Class methods:
+        read    Allows you to read lists names or items on a list.
+        add     Allows you to add new lists or new items to existing lists.
+        del     Allows you to delete a list or an item from a list.
+    """
+
     def __init__(self):
         MycroftSkill.__init__(self)
         self.db = Database()
@@ -35,30 +49,40 @@ class ListManager(MycroftSkill):
         .require('list')
         .optionally('list_name'))
     def handle_read(self, message):
-        """ Read items on a specific list or read all the lists names"""
-
         data = {'list_name': message.data.get('list_name')}
 
+        # If the user specified a list name, read the items on that list
         if data['list_name']:
+<<<<<<< Updated upstream
             # If the user specified a list name, read items on that list
+            if self.db.list_empty(data['list_name']):
+                self.speak_dialog('no.items', data)
+            elif not self.db.list_exists(data['list_name']):
+                self.speak_dialog('list.not.found', data)
+=======
+            # Check that the list exists
             if not self.db.list_exists(data['list_name']):
                 self.speak_dialog('list.not.found', data)
+
+            # Check that the list is not empty
             elif self.db.list_empty(data['list_name']):
                 self.speak_dialog('no.items', data)
+
+>>>>>>> Stashed changes
             else:
                 data['items'] = self.string(self.db.read_items(data['list_name']))
-
                 self.speak_dialog('read.items', data)
 
+        # Alternatively, simply read lists names
         else:
-            # Alternatively, simply read lists names
+            # Check if there are lists at all
             if self.db.no_lists():
                 self.speak_dialog('no.lists')
+
             else:
                 lists = self.db.read_lists()
                 data['lists_names'] = self.string(lists)
                 data['list'] = self.plural_singular_form(lists)
-
                 self.speak_dialog('read.lists', data)
 
     @intent_handler(IntentBuilder('add')
@@ -67,27 +91,27 @@ class ListManager(MycroftSkill):
         .require('list_name')
         .optionally('item_name'))
     def handle_add(self, message):
-        """ Adds a new item to an existing list or creates a new one """
-
         data = {'list_name': message.data.get('list_name'),
                 'item_name': message.data.get('item_name')}
 
+        # If the user specified an item_name, add it to a list
         if data['item_name']:
-            # If the user specified an item_name, add it to a list
+            # Check that the lists exists
             if not self.db.list_exists(data['list_name']):
                 self.speak_dialog('list.not.found', data)
+
             else:
                 self.db.add_item(data['list_name'], data['item_name'])
-
                 self.speak_dialog('add.item', data)
 
+        # Alternatively, simply create a new list
         else:
-            # Alternatively, simply create a new list
+            # Check if the list exists (we don't want to override it)
             if self.db.list_exists(data['list_name']):
                 self.speak_dialog('list.found', data)
+
             else:
                 self.db.add_list(data['list_name'])
-
                 self.speak_dialog('add.list', data)
 
     @intent_handler(IntentBuilder('del')
@@ -96,32 +120,32 @@ class ListManager(MycroftSkill):
         .require('list_name')
         .optionally('item_name'))
     def handle_del(self, message):
-        """ Remove a list or an item from an existing list """
-
         data = {'list_name': message.data.get('list_name'),
                 'item_name': message.data.get('item_name')}
 
+        # If the user specified an item_name, delete it from the list
         if data['item_name']:
-            # If the user specified an item_name, delete it from the list
+            # Check if both item and list exist
             if not (self.db.list_exists(data['list_name']) and \
                     self.db.item_exists(data['list_name'],
                                         data['item_name'])):
                 self.speak_dialog('item.not.found', data)
+
             else:
                 if self.confirm_deletion(data['item_name']):
                     self.db.del_item(data['list_name'],
                                      data['item_name'])
-
                     self.speak_dialog('del.item', data)
 
+        # Alternatively, simply create a new list
         else:
-            # Alternatively, simply create a new list
+            # Check that the list exists
             if not self.db.list_exists(data['list_name']):
                 self.speak_dialog('list.not.found', data)
+
             else:
                 if self.confirm_deletion(data['list_name']):
                     self.db.del_list(data['list_name'])
-
                     self.speak_dialog('del.list', data)
 
     def string(self, lists):

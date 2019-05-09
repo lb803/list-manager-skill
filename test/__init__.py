@@ -8,7 +8,6 @@ def test_runner(skill, example, emitter, loader):
 
     # replace the db with a mock
     s[0].db = MagicMock()
-    s[0].ListManager = MagicMock()
 
     # Read lists
     if example.endswith('handle_read.0.intent.json'):
@@ -20,16 +19,16 @@ def test_runner(skill, example, emitter, loader):
         s[0].db.list_empty.return_value = False
         s[0].db.list_exists.return_value = True
         s[0].db.read_items.return_value = ['office space', 'snowden']
-        
+
     # Read list, but there are no lists yet
     if example.endswith('handle_read.2.intent.json'):
         s[0].db.no_lists.return_value = True
-        
+
     # Read items on list, but the list is empty
     if example.endswith('handle_read.3.intent.json'):
         s[0].db.list_empty.return_value = True
         s[0].db.list_exists.return_value = True
-        
+
     # Read items on list, but the list doesn't exists
     if example.endswith('handle_read.4.intent.json'):
         s[0].db.list_exists.return_value = False
@@ -37,7 +36,7 @@ def test_runner(skill, example, emitter, loader):
     # Add list
     if example.endswith('handle_add.0.intent.json'):
         s[0].db.list_exists.return_value = False
-    
+
     # Add item to list
     if example.endswith('handle_add.1.intent.json'):
         s[0].db.list_exists.return_value = True
@@ -58,15 +57,15 @@ def test_runner(skill, example, emitter, loader):
     if example.endswith('handle_del.1.intent.json'):
         s[0].db.list_exists.return_value = True
         s[0].db.item_exists.return_value = True
-        
+
     # Del list, but the list doesn't exists
     if example.endswith('handle_del.2.intent.json'):
         s[0].db.list_exists.return_value = False
-        
+
     # Del list, but the user cancels the operation
     if example.endswith('handle_del.3.intent.json'):
         s[0].db.list_exists.return_value = True
-        
+
     # Del item from list, but list doesn't exists
     if example.endswith('handle_del.4.0.intent.json'):
         s[0].db.list_exists.return_value = False
@@ -81,7 +80,7 @@ def test_runner(skill, example, emitter, loader):
     if example.endswith('handle_del.4.2.intent.json'):
         s[0].db.list_exists.return_value = False
         s[0].db.item_exists.return_value = False
-        
+
     # Del item from list, but the user cancels the operation
     if example.endswith('handle_del.5.intent.json'):
         s[0].db.list_exists.return_value = True
