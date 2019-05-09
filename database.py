@@ -20,7 +20,8 @@ from os.path import dirname, join
 
 class Database:
     """
-    This module manage the data.json file where items ans lists are stored.
+    This module manages the data.json file where items and lists 
+    are stored.
 
     Sections:
         File handling   take care of read / write operations
@@ -33,10 +34,10 @@ class Database:
     def __init__(self):
         self.JSON_PATH = join(dirname(__file__), 'data.json')
         try:
-            # Loads list data from data.json
+            # Load list data from data.json
             self.json_data = self.read_data()
         except FileNotFoundError:
-            # If file not found, creates an empty data.json
+            # If file not found, create an empty data.json
             self.json_data = {}
             self.write_data()
 

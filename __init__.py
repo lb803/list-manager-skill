@@ -29,12 +29,12 @@ __author__ = "lb803"
 class ListManager(MycroftSkill):
     """
     List Manager is a simple utility for filing lists with Mycroft.
-
+    
     Terminology:
         item    is the information you wish Mycroft to keep record of.
                 This could be as short as a word or an entire sentence.
         list    is a collection of items.
-
+    
     Class methods:
         read    Allows you to read lists names or items on a list.
         add     Allows you to add new lists or new items to existing lists.
@@ -52,15 +52,8 @@ class ListManager(MycroftSkill):
     def handle_read(self, message):
         data = {'list_name': message.data.get('list_name')}
 
-        # If the user specified a list name, read the items on that list
+        # If the user specified a list, read the items on that list
         if data['list_name']:
-
-            # If the user specified a list name, read items on that list
-            if self.db.list_empty(data['list_name']):
-                self.speak_dialog('no.items', data)
-            elif not self.db.list_exists(data['list_name']):
-                self.speak_dialog('list.not.found', data)
-
             # Check that the list exists
             if not self.db.list_exists(data['list_name']):
                 self.speak_dialog('list.not.found', data)
@@ -94,9 +87,9 @@ class ListManager(MycroftSkill):
         data = {'list_name': message.data.get('list_name'),
                 'item_name': message.data.get('item_name')}
 
-        # If the user specified an item_name, add it to a list
+        # If the user specified an item, add it to a list
         if data['item_name']:
-            # Check that the lists exists
+            # Check if the list exists
             if not self.db.list_exists(data['list_name']):
                 self.speak_dialog('list.not.found', data)
 
@@ -104,9 +97,9 @@ class ListManager(MycroftSkill):
                 self.db.add_item(data['list_name'], data['item_name'])
                 self.speak_dialog('add.item', data)
 
-        # Alternatively, simply create a new list
+        # Alternatively, simply add a new list
         else:
-            # Check if the list exists (we don't want to override it)
+            # Check if the list exists (we don't want to overwrite it)
             if self.db.list_exists(data['list_name']):
                 self.speak_dialog('list.found', data)
 
@@ -123,9 +116,9 @@ class ListManager(MycroftSkill):
         data = {'list_name': message.data.get('list_name'),
                 'item_name': message.data.get('item_name')}
 
-        # If the user specified an item_name, delete it from the list
+        # If the user specified an item, delete it from the list
         if data['item_name']:
-            # Check if both item and list exist
+            # Check that both the item and list exist
             if not (self.db.list_exists(data['list_name']) and \
                     self.db.item_exists(data['list_name'],
                                         data['item_name'])):
@@ -137,7 +130,7 @@ class ListManager(MycroftSkill):
                                      data['item_name'])
                     self.speak_dialog('del.item', data)
 
-        # Alternatively, simply create a new list
+        # Alternatively, simply delete the list
         else:
             # Check that the list exists
             if not self.db.list_exists(data['list_name']):
