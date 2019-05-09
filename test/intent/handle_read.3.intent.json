@@ -1,5 +1,5 @@
 {
-    "expected_dialog": "read.items",
+    "expected_dialog": "no.items",
     "intent": {
         "list": "list",
         "list_name": "films",

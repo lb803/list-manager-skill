@@ -1,5 +1,5 @@
 {
-    "expected_dialog": "read.lists",
+    "expected_dialog": "no.lists",
     "utterance": "What lists do I have?",
     "intent": {
         "list": "lists",

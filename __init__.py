@@ -41,10 +41,10 @@ class ListManager(MycroftSkill):
 
         if data['list_name']:
             # If the user specified a list name, read items on that list
-            if self.db.list_empty(data['list_name']):
-                self.speak_dialog('no.items', data)
-            elif not self.db.list_exists(data['list_name']):
+            if not self.db.list_exists(data['list_name']):
                 self.speak_dialog('list.not.found', data)
+            elif self.db.list_empty(data['list_name']):
+                self.speak_dialog('no.items', data)
             else:
                 data['items'] = self.string(self.db.read_items(data['list_name']))
 

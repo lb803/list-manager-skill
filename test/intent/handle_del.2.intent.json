@@ -1,0 +1,10 @@
+{
+    "expected_dialog": "list.not.found",
+    "intent": {
+        "del": "remove",
+        "list": "list",
+        "list_name": "films"
+    },
+    "intent_type": "del",
+    "utterance": "Remove my films list"
+}

@@ -1,15 +1,12 @@
 {
-    "expected_dialog": "del.item",
+    "expected_dialog": "del.list",
     "intent": {
         "del": "remove",
-        "item_name": "water the plants",
         "list": "list",
-        "list_name": "important"
+        "list_name": "films"
     },
-    "intent_type": "handle_del",
-    "utterance": "Remove water the plants from my important list",
-    "expected_data": {
-        "list_name": "important",
-        "item_name": "water the plants"
-    }
+    "intent_type": "del",
+    "utterance": "Remove my films list",
+    "responses": ["yes"],
+    "evaluation_timeout": "10"
 }

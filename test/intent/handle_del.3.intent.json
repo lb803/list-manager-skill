@@ -1,13 +1,12 @@
 {
-    "expected_dialog": "del.item",
+    "expected_dialog": "cancelled",
     "intent": {
         "del": "remove",
-        "item_name": "office space",
         "list": "list",
         "list_name": "films"
     },
     "intent_type": "del",
-    "utterance": "Remove office space from my films list",
-    "responses": ["yes"],
+    "utterance": "Remove my films list",
+    "responses": ["no"],
     "evaluation_timeout": "10"
 }
