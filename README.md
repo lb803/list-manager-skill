@@ -14,7 +14,10 @@ Whether these are titles of books to read, the specs of your new bike, or random
  - "Remove return books to the library from my today list"
 
 ## Credits
-Luca Baffa
+Luca Baffa (@lb803)
 
-## License
-GPL 3
+## Category
+Productivity
+
+## Tags
+#Notes #Note-taking

@@ -24,6 +24,7 @@ from os.path import dirname, abspath
 sys.path.append(dirname(abspath(__file__)))
 from database import Database
 
+__author__ = "lb803"
 
 class ListManager(MycroftSkill):
     """
@@ -53,13 +54,13 @@ class ListManager(MycroftSkill):
 
         # If the user specified a list name, read the items on that list
         if data['list_name']:
-<<<<<<< Updated upstream
+
             # If the user specified a list name, read items on that list
             if self.db.list_empty(data['list_name']):
                 self.speak_dialog('no.items', data)
             elif not self.db.list_exists(data['list_name']):
                 self.speak_dialog('list.not.found', data)
-=======
+
             # Check that the list exists
             if not self.db.list_exists(data['list_name']):
                 self.speak_dialog('list.not.found', data)
@@ -68,7 +69,6 @@ class ListManager(MycroftSkill):
             elif self.db.list_empty(data['list_name']):
                 self.speak_dialog('no.items', data)
 
->>>>>>> Stashed changes
             else:
                 data['items'] = self.string(self.db.read_items(data['list_name']))
                 self.speak_dialog('read.items', data)
