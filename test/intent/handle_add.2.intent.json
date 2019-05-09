@@ -1,0 +1,10 @@
+{
+    "expected_dialog": "list.found",
+    "intent": {
+        "add": "create",
+        "list": "list",
+        "list_name": "films"
+    },
+    "intent_type": "add",
+    "utterance": "Create a new list called films"
+}

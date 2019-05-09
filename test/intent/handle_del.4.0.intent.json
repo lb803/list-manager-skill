@@ -1,0 +1,11 @@
+{
+    "expected_dialog": "item.not.found",
+    "intent": {
+        "del": "remove",
+        "item_name": "office space",
+        "list": "list",
+        "list_name": "films"
+    },
+    "intent_type": "del",
+    "utterance": "Remove office space from my films list"
+}

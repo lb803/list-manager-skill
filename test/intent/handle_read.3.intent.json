@@ -1,0 +1,10 @@
+{
+    "expected_dialog": "no.items",
+    "intent": {
+        "list": "list",
+        "list_name": "films",
+        "what": "what"
+    },
+    "intent_type": "read",
+    "utterance": "What's on my films list?"
+}

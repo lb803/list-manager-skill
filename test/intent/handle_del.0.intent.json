@@ -1,0 +1,12 @@
+{
+    "expected_dialog": "del.list",
+    "intent": {
+        "del": "remove",
+        "list": "list",
+        "list_name": "films"
+    },
+    "intent_type": "del",
+    "utterance": "Remove my films list",
+    "responses": ["yes"],
+    "evaluation_timeout": "10"
+}
