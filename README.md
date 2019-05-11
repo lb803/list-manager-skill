@@ -1,4 +1,4 @@
-## List Manager
+## <img src='https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/regular/sticky-note.svg' card_color='#000000' width='50' height='50' style='vertical-align:bottom'/> List Manager
 Access and manage lists with Mycroft.
 
 ## Description
