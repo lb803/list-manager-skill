@@ -1,0 +1,1 @@
+(lägg till|skapa|ta bort) (?P<item_name>.*) (till|från) (min|i min)

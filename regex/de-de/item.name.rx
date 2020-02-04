@@ -1,0 +1,1 @@
+(füge|erstelle|entferne) (?P<item_name>.*) (zu|von) (meine|meiner|der)

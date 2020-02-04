@@ -1,0 +1,2 @@
+lista (kallad|som heter) (?P<list_name>.*)
+(min|) (?P<list_name>.*) lista

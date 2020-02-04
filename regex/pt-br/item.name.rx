@@ -1,0 +1,1 @@
+(adicionar|criar|remover) (?P<item_name>.*) (a|de) (meu|o)
