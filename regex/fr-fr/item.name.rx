@@ -1,0 +1,1 @@
+(ajoute|crée|retire) (?P<item_name>.*) (de|du) (ma|mon|la|)

@@ -1,0 +1,2 @@
+lista (llamada|nombrada) (?P<list_name>.*)
+(mi|la) lista (?P<list_name>.*)

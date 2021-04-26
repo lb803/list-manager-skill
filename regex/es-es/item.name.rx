@@ -1,0 +1,1 @@
+(añade|crea|elimina|quita) (?P<item_name>.*) (de|en) (mi|la)

@@ -1,0 +1,2 @@
+Liste (called|named) (?P<list_name>.*)
+(ma|la) liste (?P<list_name>.*)

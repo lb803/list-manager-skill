@@ -1,0 +1,2 @@
+Liste (namens|bennant) (?P<list_name>.*)
+(meine|die) (?P<list_name>.*) Liste
