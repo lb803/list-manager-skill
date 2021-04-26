@@ -58,10 +58,7 @@ class Database:
         return True if len(list(self.json_data.keys())) == 0 else False
 
     def list_empty(self, list):
-        if len(self.json_data.get(list)) == 0:
-            return True
-        else:
-            return False
+        return True if len(self.json_data.get(list)) == 0 else False
 
     def list_exists(self, list):
         return True if list in self.json_data.keys() else False
