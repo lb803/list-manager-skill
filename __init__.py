@@ -27,15 +27,16 @@ from database import Database
 
 __author__ = "lb803"
 
+
 class ListManager(MycroftSkill):
     """
     List Manager is a simple utility for filing lists with Mycroft.
-    
+
     Terminology:
         item    is the information you wish Mycroft to keep record of.
                 This could be as short as a word or an entire sentence.
         list    is a collection of items.
-    
+
     Class methods:
         read    Allows you to read lists names or items on a list.
         add     Allows you to add new lists or new items to existing lists.
@@ -99,7 +100,7 @@ class ListManager(MycroftSkill):
 
             else:
                 if self.db.item_exists(data['list_name'], data['item_name']):
-                    self.speak_dialog('item.already_exists',data)
+                    self.speak_dialog('item.already_exists', data)
                 else:
                     self.db.add_item(data['list_name'], data['item_name'])
                     self.speak_dialog('add.item', data)
@@ -126,7 +127,7 @@ class ListManager(MycroftSkill):
         # If the user specified an item, delete it from the list
         if data['item_name']:
             # Check that both the item and list exist
-            if not (self.db.list_exists(data['list_name']) and \
+            if not (self.db.list_exists(data['list_name']) and
                     self.db.item_exists(data['list_name'],
                                         data['item_name'])):
                 self.speak_dialog('item.not.found', data)
