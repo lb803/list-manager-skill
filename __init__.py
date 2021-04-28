@@ -147,8 +147,8 @@ class ListManager(MycroftSkill):
     def string(self, lists):
         """ Convert a python list into a string such as 'a, b and c' """
 
-        conj = self.translate_namedvalues('conj', delim=',')
-        conj_spaced = ' {} '.format(conj.get('conj'))
+        conj = self.translate('and')
+        conj_spaced = ' {} '.format(conj)
         return ', '.join(lists[:-2] + [conj_spaced.join(lists[-2:])])
 
     def plural_singular_form(self, lists):
