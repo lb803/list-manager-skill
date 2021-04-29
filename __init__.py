@@ -100,7 +100,7 @@ class ListManager(MycroftSkill):
 
             else:
                 if self.db.item_exists(data['list_name'], data['item_name']):
-                    self.speak_dialog('item.already_exists', data)
+                    self.speak_dialog('item.already.exists', data)
                 else:
                     self.db.add_item(data['list_name'], data['item_name'])
                     self.speak_dialog('add.item', data)
