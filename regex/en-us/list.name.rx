@@ -1,2 +1,2 @@
 list (called|named) (?P<list_name>.*)
-(my|the) (?P<list_name>.*) list
+(?:my|the)\s+(?P<list_name>(?:(?!(to|from)\s+(my|the)\s+).)+?)\s+list

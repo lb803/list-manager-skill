@@ -17,6 +17,7 @@
 
 from mycroft import MycroftSkill, intent_handler
 from adapt.intent import IntentBuilder
+from mycroft.util.format import join_list
 
 # Import database.py
 import sys
@@ -26,15 +27,16 @@ from database import Database
 
 __author__ = "lb803"
 
+
 class ListManager(MycroftSkill):
     """
     List Manager is a simple utility for filing lists with Mycroft.
-    
+
     Terminology:
         item    is the information you wish Mycroft to keep record of.
                 This could be as short as a word or an entire sentence.
         list    is a collection of items.
-    
+
     Class methods:
         read    Allows you to read lists names or items on a list.
         add     Allows you to add new lists or new items to existing lists.
@@ -63,7 +65,9 @@ class ListManager(MycroftSkill):
                 self.speak_dialog('no.items', data)
 
             else:
-                data['items'] = self.string(self.db.read_items(data['list_name']))
+                data['items'] = join_list(
+                    self.db.read_items(data['list_name']),
+                    self.translate('and'), lang=self.lang)
                 self.speak_dialog('read.items', data)
 
         # Alternatively, simply read lists names
@@ -74,7 +78,8 @@ class ListManager(MycroftSkill):
 
             else:
                 lists = self.db.read_lists()
-                data['lists_names'] = self.string(lists)
+                data['lists_names'] = join_list(lists, self.translate('and'),
+                                                lang=self.lang)
                 data['list'] = self.plural_singular_form(lists)
                 self.speak_dialog('read.lists', data)
 
@@ -95,7 +100,7 @@ class ListManager(MycroftSkill):
 
             else:
                 if self.db.item_exists(data['list_name'], data['item_name']):
-                    self.speak_dialog('item.already_exists',data)
+                    self.speak_dialog('item.already.exists', data)
                 else:
                     self.db.add_item(data['list_name'], data['item_name'])
                     self.speak_dialog('add.item', data)
@@ -122,7 +127,7 @@ class ListManager(MycroftSkill):
         # If the user specified an item, delete it from the list
         if data['item_name']:
             # Check that both the item and list exist
-            if not (self.db.list_exists(data['list_name']) and \
+            if not (self.db.list_exists(data['list_name']) and
                     self.db.item_exists(data['list_name'],
                                         data['item_name'])):
                 self.speak_dialog('item.not.found', data)
@@ -143,13 +148,6 @@ class ListManager(MycroftSkill):
                 if self.confirm_deletion(data['list_name']):
                     self.db.del_list(data['list_name'])
                     self.speak_dialog('del.list', data)
-
-    def string(self, lists):
-        """ Convert a python list into a string such as 'a, b and c' """
-
-        conj = self.translate_namedvalues('conj', delim=',')
-        conj_spaced = ' {} '.format(conj.get('conj'))
-        return ', '.join(lists[:-2] + [conj_spaced.join(lists[-2:])])
 
     def plural_singular_form(self, lists):
         """ Return singular or plural form as necessary """
