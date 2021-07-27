@@ -39,6 +39,7 @@ def test_runner(skill, example, emitter, loader):
 
     # Add item to list
     if example.endswith('handle_add.1.intent.json'):
+        s[0].db.item_exists.return_value = False
         s[0].db.list_exists.return_value = True
 
     # Add list, but list already exists
