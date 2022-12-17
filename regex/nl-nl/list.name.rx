@@ -1,2 +1,2 @@
-liste (appelée|nommée) (?P<list_name>.*)
+lijst genoemd (?P<list_name>.*)
 (?:my|the)\s+(?P<list_name>(?:(?!(to|from)\s+(my|the)\s+).)+?)\s+list

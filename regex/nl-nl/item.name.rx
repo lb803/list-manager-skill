@@ -1,0 +1,1 @@
+(voeg|maak|vewijder) (?P<item_name>.*) (toe aan|aan van|van) (mijn|de|het)
